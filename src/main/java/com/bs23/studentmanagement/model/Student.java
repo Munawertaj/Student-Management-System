@@ -1,16 +1,29 @@
 package com.bs23.studentmanagement.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 @Entity
 public class Student {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @NotBlank(message = "Name is required")
+    @Size(min = 3, message = "Name must be at least 3 characters long")
+    @Pattern(regexp = "^[a-zA-Z ]+$", message = "Name can only contain letters and spaces")
     private String name;
+
+    @Min(value = 16, message = "Age must be greater than 15")
     private int age;
+
+    @NotBlank(message = "Email is required")
+    @Email(message = "Email must be valid")
+    @Column(unique = true)
     private String email;
+
+    @NotBlank(message = "Department is required")
     private String department;
 
     public Student() {

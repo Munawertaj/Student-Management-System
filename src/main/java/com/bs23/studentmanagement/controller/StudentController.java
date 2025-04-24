@@ -2,8 +2,10 @@ package com.bs23.studentmanagement.controller;
 
 import com.bs23.studentmanagement.model.Student;
 import com.bs23.studentmanagement.service.StudentService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -29,7 +31,11 @@ public class StudentController {
     }
 
     @PostMapping("/add")
-    public String addStudent(@ModelAttribute Student student) {
+    public String addStudent(@Valid @ModelAttribute Student student, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "add";
+        }
+
         service.save(student);
         return "redirect:/students";
     }
@@ -42,7 +48,11 @@ public class StudentController {
     }
 
     @PostMapping("/update")
-    public String updateStudent(@ModelAttribute Student student) {
+    public String updateStudent(@Valid @ModelAttribute Student student, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "update";
+        }
+
         service.update(student);
         return "redirect:/students";
     }

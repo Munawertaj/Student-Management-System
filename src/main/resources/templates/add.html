@@ -21,22 +21,26 @@
         <form th:action="@{/students/add}" th:object="${student}" method="post">
             <div class="mb-3">
                 <label class="form-label">Full Name</label>
-                <input type="text" class="form-control form-control-md" th:field="*{name}" required placeholder="Enter student's full name"/>
+                <input type="text" class="form-control form-control-md" th:field="*{name}" placeholder="Enter student's full name"/>
+                <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Age</label>
-                <input type="number" min="0" class="form-control form-control-md" th:field="*{age}" required placeholder="Enter student's age"/>
+                <input type="number" min="0" class="form-control form-control-md" th:field="*{age}" placeholder="Enter student's age"/>
+                <div class="text-danger" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Department</label>
-                <input type="text" class="form-control form-control-md" th:field="*{department}" required placeholder="Enter student's department"/>
+                <input type="text" class="form-control form-control-md" th:field="*{department}" placeholder="Enter student's department"/>
+                <div class="text-danger" th:if="${#fields.hasErrors('department')}" th:errors="*{department}"></div>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Email Address</label>
-                <input type="email" class="form-control form-control-md" th:field="*{email}" required placeholder="Enter student's email"/>
+                <input type="email" class="form-control form-control-md" th:field="*{email}" placeholder="Enter student's email"/>
+                <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
             </div>
 
             <div class="form-footer mt-4">
